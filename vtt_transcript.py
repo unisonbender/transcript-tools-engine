@@ -37,9 +37,11 @@ def paragraph_maker(vtt_file):
     Returns:
         Concatenated string of all caption lines.
     """
+
     line_list = text_extractor(vtt_file)
 
     connect_string = ""
+
     for line in line_list:
         connect_string = connect_string + " " + line
 
@@ -49,3 +51,15 @@ def paragraph_maker(vtt_file):
 
 paragraph = paragraph_maker('samples/sample.vtt')
 print(paragraph)
+
+sentences = []
+current_sentence = ""
+
+for char in paragraph:
+    current_sentence += char
+
+    if char == "." or char == "?" or char == "!":
+        sentences.append(current_sentence.strip())
+        current_sentence = ""
+    
+print(sentences)
