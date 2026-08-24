@@ -25,6 +25,9 @@ def paragraph_maker(vtt_file):
     for line in line_list:
         connect_string = connect_string + " " + line
 
+    connect_string.strip()
+
     return connect_string
 
-print(paragraph_maker('samples/sample.vtt'))
+paragraph = paragraph_maker('samples/sample.vtt')
+print(paragraph)
