@@ -1,5 +1,13 @@
 def text_extractor(vtt_file):
+    """
+    Extract transcript text lines from a WebVTT file.
 
+    Args: 
+        vtt_file: Path to the WebVTT file.
+
+    Returns: 
+        A list of caption text lines.
+    """
     with open(vtt_file, 'r') as file:
         lines = []
         for line in file:
@@ -19,13 +27,23 @@ def text_extractor(vtt_file):
     return lines
 
 def paragraph_maker(vtt_file):
+    """
+    Concatenate caption lines from a WebVTT 
+    file into a single paragraph.
+
+    Args:
+        vtt_file: Path to the WebVTT file.
+
+    Returns:
+        Concatenated string of all caption lines.
+    """
     line_list = text_extractor(vtt_file)
 
     connect_string = ""
     for line in line_list:
         connect_string = connect_string + " " + line
 
-    connect_string.strip()
+    connect_string = connect_string.strip()
 
     return connect_string
 
