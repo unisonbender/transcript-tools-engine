@@ -1,17 +1,30 @@
-with open('samples/sample.vtt', 'r') as vtt_file:
-    for line in vtt_file:
-        line = line.strip()
+def text_extractor(vtt_file):
 
-        if line == "WEBVTT":
-            continue
-        
-        if line == '':
-            continue
+    with open(vtt_file, 'r') as file:
+        lines = []
+        for line in file:
+            line = line.strip()
 
-        if line.isdigit():
-            continue
+            if line == "WEBVTT":
+                continue
+            if line == '':
+                continue
+            if line.isdigit():
+                continue
+            if '-->' in line:
+                continue
 
-        if '-->' in line:
-            continue
+            lines.append(line)
 
-        print(line)
+    return lines
+
+def paragraph_maker(vtt_file):
+    line_list = text_extractor(vtt_file)
+
+    connect_string = ""
+    for line in line_list:
+        connect_string = connect_string + " " + line
+
+    return connect_string
+
+print(paragraph_maker('samples/sample.vtt'))
